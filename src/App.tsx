@@ -53,7 +53,7 @@ export default function App() {
   };
 
   const handleResumeClick = () => {
-    window.open("/NataelLavoie_CV.pdf", "_blank");
+    window.open(`${import.meta.env.BASE_URL}NataelLavoie_CV.pdf`, "_blank");
   };
 
   const displayedAcademic =
