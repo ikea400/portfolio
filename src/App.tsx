@@ -17,7 +17,7 @@ import {
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [filter, setFilter] = useState<"all" | "academic" | "personal">("all");
-  const [language, setLanguage] = useState<"en" | "fr">("en");
+  const [language, setLanguage] = useState<"en" | "fr">("fr");
   const [copied, setCopied] = useState(false);
 
   const t = translations[language];
@@ -208,8 +208,8 @@ export default function App() {
             <button
               onClick={() => setFilter("all")}
               className={`px-3 py-1 text-xs font-mono rounded transition-colors uppercase tracking-wider ${filter === "all"
-                  ? "bg-secondary text-black font-semibold"
-                  : "text-neutral-400 hover:text-white"
+                ? "bg-secondary text-black font-semibold"
+                : "text-neutral-400 hover:text-white"
                 }`}
             >
               {t.projects.all}
@@ -217,8 +217,8 @@ export default function App() {
             <button
               onClick={() => setFilter("academic")}
               className={`px-3 py-1 text-xs font-mono rounded transition-colors uppercase tracking-wider ${filter === "academic"
-                  ? "bg-secondary text-black font-semibold"
-                  : "text-neutral-400 hover:text-white"
+                ? "bg-secondary text-black font-semibold"
+                : "text-neutral-400 hover:text-white"
                 }`}
             >
               {t.projects.academic}
@@ -226,8 +226,8 @@ export default function App() {
             <button
               onClick={() => setFilter("personal")}
               className={`px-3 py-1 text-xs font-mono rounded transition-colors uppercase tracking-wider ${filter === "personal"
-                  ? "bg-secondary text-black font-semibold"
-                  : "text-neutral-400 hover:text-white"
+                ? "bg-secondary text-black font-semibold"
+                : "text-neutral-400 hover:text-white"
                 }`}
             >
               {t.projects.personal}
