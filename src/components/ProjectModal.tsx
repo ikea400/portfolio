@@ -17,15 +17,15 @@ export default function ProjectModal({ project, language, onClose }: ProjectModa
   if (!project) return null;
 
   const t = translations[language].modal;
-  const categoryName = language === 'fr' 
-    ? (project.category === 'academic' ? 'académique' : 'personnel') 
+  const categoryName = language === 'fr'
+    ? (project.category === 'academic' ? 'académique' : 'personnel')
     : project.category;
 
   return (
     <div className="fixed inset-0 z-[100] overflow-y-auto flex items-center justify-center bg-background/95 backdrop-blur-md p-4 animate-fadeIn">
       {/* Container card */}
       <div className="bg-[#131315] border border-glass-border rounded-xl w-full max-w-5xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col relative">
-        
+
         {/* Hover bar top decorative */}
         <div className="h-1 w-full bg-gradient-to-r from-secondary via-amber-300 to-emerald-400"></div>
 
@@ -125,7 +125,7 @@ export default function ProjectModal({ project, language, onClose }: ProjectModa
         {/* Footer */}
         <div className="px-6 py-4 border-t border-glass-border bg-[#101012] flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
           <span>{t.projectType}: {project.title}</span>
-          <span>© 2026 PORTFOLIO PIPELINE</span>
+          <span>© 2026 Natael Lavoie</span>
         </div>
       </div>
     </div>
