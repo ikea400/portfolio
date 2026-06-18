@@ -102,50 +102,50 @@ export default function MicroservicesSimulator() {
   }
 
   return (
-    <div className="bg-[#1b1b1d] border border-glass-border p-6 rounded-lg space-y-6">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-6 rounded-lg space-y-6">
       <div>
-        <h4 className="text-sm font-metadata-caps text-secondary uppercase tracking-widest flex items-center gap-2">
+        <h4 className="text-sm font-metadata-caps text-[var(--color-secondary)] uppercase tracking-widest flex items-center gap-2">
           <Cpu size={14} /> Microservices CI/CD &amp; Routing Simulator
         </h4>
-        <p className="text-xs text-on-surface-variant mt-1 font-sans">
+        <p className="text-xs text-[var(--color-secondary)] mt-1 font-sans">
           Simulate GitHub Actions automation on push events, orchestrate node failures, and watch service failovers and DB fallback latencies live.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Side: CI/CD Runner Panel */}
-        <div className="lg:col-span-5 bg-[#131315] border border-glass-border p-4 rounded-lg flex flex-col justify-between space-y-4">
+        <div className="lg:col-span-5 bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-lg flex flex-col justify-between space-y-4">
           <div className="space-y-3">
-            <span className="text-[10px] font-metadata-caps uppercase text-secondary tracking-wider block">
+            <span className="text-[10px] font-metadata-caps uppercase text-[var(--color-secondary)] tracking-wider block">
               CI/CD pipeline (VM runner)
             </span>
             <div className="flex flex-col space-y-1">
-              <span className="text-[9px] font-mono text-on-surface-variant">COMMIT MESSAGE</span>
+              <span className="text-[9px] font-mono text-[var(--color-secondary)]">COMMIT MESSAGE</span>
               <input
                 type="text"
                 value={commitMsg}
                 disabled={pipelineState !== 'idle' && pipelineState !== 'completed'}
                 onChange={(e) => setCommitMsg(e.target.value)}
-                className="bg-[#201f21] border border-glass-border text-xs font-mono p-2 text-primary focus:outline-none focus:border-secondary rounded"
+                className="bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono p-2 text-[var(--color-text)] focus:outline-none focus:border-secondary rounded"
               />
             </div>
             
             <button
               onClick={handlePushCommit}
               disabled={pipelineState !== 'idle'}
-              className="w-full bg-secondary text-on-secondary py-2 text-xs font-metadata-caps uppercase hover:bg-[#ffe2b3] transition-colors rounded tracking-widest flex justify-center items-center gap-1.5 cursor-pointer disabled:opacity-40"
+              className="w-full bg-[var(--color-secondary)] text-[var(--color-background)] py-2 text-xs font-metadata-caps uppercase hover:bg-[#ffe2b3] transition-colors rounded tracking-widest flex justify-center items-center gap-1.5 cursor-pointer disabled:opacity-40"
             >
               <GitCommit size={14} /> {pipelineState === 'idle' ? 'PUSH COMMIT' : 'RUNNING PIPELINE...'}
             </button>
           </div>
 
           {/* Pipeline Visual Steps */}
-          <div className="space-y-3 py-2 border-t border-glass-border/30">
-            <div className="flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
+          <div className="space-y-3 py-2 border-t border-[var(--color-border)]/30">
+            <div className="flex justify-between items-center text-[10px] font-mono text-[var(--color-secondary)]">
               <span>PIPELINE PROGRESS:</span>
               <span>{progress}%</span>
             </div>
-            <div className="w-full bg-[#201f21] h-1 rounded-full overflow-hidden">
+            <div className="w-full bg-[var(--color-surface)] h-1 rounded-full overflow-hidden">
               <div 
                 className="bg-[#ffb951] h-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
@@ -175,9 +175,9 @@ export default function MicroservicesSimulator() {
 
         {/* Right Side: Cluster Graph & Nodes */}
         <div className="lg:col-span-7 space-y-4">
-          <div className="bg-[#131315] border border-glass-border p-4 rounded-lg space-y-4">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-lg space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-[10px] font-metadata-caps uppercase text-secondary tracking-wider">
+              <span className="text-[10px] font-metadata-caps uppercase text-[var(--color-secondary)] tracking-wider">
                 Microservices cluster topology
               </span>
               <div className="flex items-center gap-1.5">
@@ -187,11 +187,11 @@ export default function MicroservicesSimulator() {
             </div>
 
             {/* Topology Map */}
-            <div className="bg-[#1c1c1e]/60 border border-glass-border/40 rounded p-4 flex flex-col items-center justify-between min-h-[140px] space-y-4 relative">
+            <div className="bg-[var(--color-surface)]/60 border border-[var(--color-border)]/40 rounded p-4 flex flex-col items-center justify-between min-h-[140px] space-y-4 relative">
               
               {/* Node Layout Row 1: Client Gateway */}
               <div className="flex flex-col items-center z-10">
-                <div className={`px-3 py-1 rounded text-center border font-mono text-[10px] ${graphqlOnline ? 'bg-[#131315] border-glass-border text-white' : 'bg-red-950/20 border-red-500/30 text-red-500'}`}>
+                <div className={`px-3 py-1 rounded text-center border font-mono text-[10px] ${graphqlOnline ? 'bg-[var(--color-surface)] border-[var(--color-border)] text-white' : 'bg-red-950/20 border-red-500/30 text-red-500'}`}>
                   GraphQL Gateway
                   <span className="block text-[8px] opacity-60">Port 8080</span>
                 </div>
@@ -202,7 +202,7 @@ export default function MicroservicesSimulator() {
 
               {/* Node Layout Row 2: Python API backend */}
               <div className="flex flex-col items-center z-10">
-                <div className={`px-3 py-1 rounded text-center border font-mono text-[10px] ${pythonApiOnline ? 'bg-[#131315] border-glass-border text-white' : 'bg-red-950/20 border-red-500/30 text-red-500'}`}>
+                <div className={`px-3 py-1 rounded text-center border font-mono text-[10px] ${pythonApiOnline ? 'bg-[var(--color-surface)] border-[var(--color-border)] text-white' : 'bg-red-950/20 border-red-500/30 text-red-500'}`}>
                   Python FastAPI Core
                   <span className="block text-[8px] opacity-60">Port 5000</span>
                 </div>
@@ -210,11 +210,11 @@ export default function MicroservicesSimulator() {
 
               {/* Node Layout Row 3: Cache and Database */}
               <div className="flex justify-center gap-6 w-full z-10">
-                <div className={`px-3 py-1 rounded text-center border font-mono text-[10px] ${redisOnline ? 'bg-[#131315] border-glass-border text-white' : 'bg-red-950/20 border-red-500/30 text-red-500'}`}>
+                <div className={`px-3 py-1 rounded text-center border font-mono text-[10px] ${redisOnline ? 'bg-[var(--color-surface)] border-[var(--color-border)] text-white' : 'bg-red-950/20 border-red-500/30 text-red-500'}`}>
                   Redis Cache Pool
                   <span className="block text-[8px] opacity-60">Port 6379</span>
                 </div>
-                <div className="px-3 py-1 rounded text-center border border-glass-border font-mono text-[10px] bg-[#131315] text-white">
+                <div className="px-3 py-1 rounded text-center border border-[var(--color-border)] font-mono text-[10px] bg-[var(--color-surface)] text-white">
                   PostgreSQL Database
                   <span className="block text-[8px] opacity-60">Port 5432</span>
                 </div>
@@ -222,7 +222,7 @@ export default function MicroservicesSimulator() {
             </div>
 
             {/* Toggle Switch Controls */}
-            <div className="grid grid-cols-3 gap-2 border-t border-glass-border/30 pt-3">
+            <div className="grid grid-cols-3 gap-2 border-t border-[var(--color-border)]/30 pt-3">
               <button 
                 onClick={() => setGraphqlOnline(!graphqlOnline)} 
                 className={`py-1.5 px-2 text-[9px] font-mono border rounded uppercase leading-none cursor-pointer text-center ${graphqlOnline ? 'border-[#2ADE80]/30 text-[#2ADE80] bg-[#2ADE80]/5 hover:bg-[#2ADE80]/15' : 'border-red-500/30 text-red-500 bg-red-950/10 hover:bg-red-950/25'}`}
@@ -246,16 +246,16 @@ export default function MicroservicesSimulator() {
 
           {/* Node diagnostics & logs */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-            <div className="md:col-span-4 bg-[#131315] border border-glass-border p-3 rounded-lg flex flex-col justify-center text-center font-mono">
-              <span className="text-[8px] text-on-surface-variant uppercase">Average Latency</span>
+            <div className="md:col-span-4 bg-[var(--color-surface)] border border-[var(--color-border)] p-3 rounded-lg flex flex-col justify-center text-center font-mono">
+              <span className="text-[8px] text-[var(--color-secondary)] uppercase">Average Latency</span>
               <span className={`text-xl font-bold mt-1 ${graphqlOnline && pythonApiOnline ? 'text-cyan-400' : 'text-red-500'}`}>{avgLatency}</span>
             </div>
 
-            <div className="md:col-span-8 bg-[#131315] border border-glass-border p-3 rounded-lg flex flex-col h-36">
-              <span className="text-[8px] font-metadata-caps text-on-surface-variant tracking-wider uppercase mb-1.5 flex items-center gap-1">
+            <div className="md:col-span-8 bg-[var(--color-surface)] border border-[var(--color-border)] p-3 rounded-lg flex flex-col h-36">
+              <span className="text-[8px] font-metadata-caps text-[var(--color-secondary)] tracking-wider uppercase mb-1.5 flex items-center gap-1">
                 <Activity size={10} className="text-[#ffb951] animate-pulse" /> CLUSTER NET LOGS
               </span>
-              <div className="bg-[#0e0e10] p-2 text-[8px] font-mono text-cyan-400/80 flex-1 overflow-y-auto space-y-1 rounded">
+              <div className="bg-[var(--color-surface)] p-2 text-[8px] font-mono text-cyan-400/80 flex-1 overflow-y-auto space-y-1 rounded">
                 {logs.map((l, i) => {
                   let c = 'text-cyan-400/80';
                   if (l.type === 'error') c = 'text-red-400';

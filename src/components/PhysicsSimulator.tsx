@@ -329,20 +329,20 @@ export default function PhysicsSimulator() {
   }, [gravity, restitution]);
 
   return (
-    <div className="bg-[#1b1b1d] border border-glass-border p-6 rounded-lg space-y-6">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-6 rounded-lg space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h4 className="text-sm font-metadata-caps text-secondary uppercase tracking-widest flex items-center gap-2">
+          <h4 className="text-sm font-metadata-caps text-[var(--color-secondary)] uppercase tracking-widest flex items-center gap-2">
             <Activity size={14} /> Modular 2D Rigid Body Physics Sandbox
           </h4>
-          <p className="text-xs text-on-surface-variant mt-1 font-sans">
+          <p className="text-xs text-[var(--color-secondary)] mt-1 font-sans">
             Spawns physical circles and boxes. Click empty canvas fields to insert bodies, drag/toss them with constraints, or adjust physical parameters.
           </p>
         </div>
 
         <button
           onClick={clearSandbox}
-          className="border border-glass-border text-[10px] font-metadata-caps text-on-surface-variant hover:text-primary hover:border-primary px-3 py-1.5 rounded flex items-center gap-1 transition-colors uppercase cursor-pointer"
+          className="border border-[var(--color-border)] text-[10px] font-metadata-caps text-[var(--color-secondary)] hover:text-[var(--color-text)] hover:border-primary px-3 py-1.5 rounded flex items-center gap-1 transition-colors uppercase cursor-pointer"
         >
           <RotateCcw size={10} /> Reset Canvas
         </button>
@@ -351,27 +351,27 @@ export default function PhysicsSimulator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Canvas Render Workspace */}
         <div className="lg:col-span-7 flex flex-col justify-center">
-          <div className="text-center font-mono text-[9px] text-on-surface-variant opacity-60 mb-2 uppercase select-none flex items-center justify-center gap-1">
+          <div className="text-center font-mono text-[9px] text-[var(--color-secondary)] opacity-60 mb-2 uppercase select-none flex items-center justify-center gap-1">
             2D Physics Vector Solver (HTML5 Canvas) <HelpCircle size={10} title="Click inside canvas to spawn blocks" />
           </div>
 
           <canvas
             ref={canvasRef}
-            className="w-full bg-[#131315] border border-glass-border rounded-lg shadow-inner cursor-pointer"
+            className="w-full bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-inner cursor-pointer"
           />
         </div>
 
         {/* Physics Solver Controls and Metrics */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="border border-glass-border bg-[#131315] p-5 rounded-md space-y-4">
-            <span className="text-[10px] font-metadata-caps text-secondary uppercase tracking-wider block">
+          <div className="border border-[var(--color-border)] bg-[var(--color-surface)] p-5 rounded-md space-y-4">
+            <span className="text-[10px] font-metadata-caps text-[var(--color-secondary)] uppercase tracking-wider block">
               Vector Math Integrator Variables
             </span>
 
             {/* Sliders */}
             <div className="space-y-4 font-mono text-xs">
               <div className="space-y-1.5">
-                <div className="flex justify-between text-[10px] text-on-surface-variant">
+                <div className="flex justify-between text-[10px] text-[var(--color-secondary)]">
                   <span>Gravity (Acceleration):</span>
                   <span>{gravity.toFixed(1)} m/s²</span>
                 </div>
@@ -387,7 +387,7 @@ export default function PhysicsSimulator() {
               </div>
 
               <div className="space-y-1.5">
-                <div className="flex justify-between text-[10px] text-on-surface-variant">
+                <div className="flex justify-between text-[10px] text-[var(--color-secondary)]">
                   <span>Coefficient of Restitution (Elasticity):</span>
                   <span>{(restitution * 100).toFixed(0)}% Bouncy</span>
                 </div>
@@ -404,24 +404,24 @@ export default function PhysicsSimulator() {
             </div>
 
             {/* Readout Metrics */}
-            <div className="pt-3 border-t border-glass-border/30 grid grid-cols-3 gap-2 font-mono text-[10px] text-center">
-              <div className="bg-[#1b1b1d] p-2 rounded border border-glass-border/40">
-                <span className="text-on-surface-variant block text-[8px] uppercase">Active Bodies</span>
-                <span className="text-primary font-bold text-xs mt-1 block">{activeCount}</span>
+            <div className="pt-3 border-t border-[var(--color-border)]/30 grid grid-cols-3 gap-2 font-mono text-[10px] text-center">
+              <div className="bg-[var(--color-surface)] p-2 rounded border border-[var(--color-border)]/40">
+                <span className="text-[var(--color-secondary)] block text-[8px] uppercase">Active Bodies</span>
+                <span className="text-[var(--color-text)] font-bold text-xs mt-1 block">{activeCount}</span>
               </div>
-              <div className="bg-[#1b1b1d] p-2 rounded border border-glass-border/40">
-                <span className="text-on-surface-variant block text-[8px] uppercase">Total Collisions</span>
+              <div className="bg-[var(--color-surface)] p-2 rounded border border-[var(--color-border)]/40">
+                <span className="text-[var(--color-secondary)] block text-[8px] uppercase">Total Collisions</span>
                 <span className="text-[#2ADE80] font-bold text-xs mt-1 block">{collisionCount}</span>
               </div>
-              <div className="bg-[#1b1b1d] p-2 rounded border border-glass-border/40">
-                <span className="text-on-surface-variant block text-[8px] uppercase">Kinetic Energy</span>
+              <div className="bg-[var(--color-surface)] p-2 rounded border border-[var(--color-border)]/40">
+                <span className="text-[var(--color-secondary)] block text-[8px] uppercase">Kinetic Energy</span>
                 <span className="text-cyan-400 font-bold text-xs mt-1 block">{kineticEnergy}J</span>
               </div>
             </div>
           </div>
 
           {/* ODE Integrator C++20 snippet display */}
-          <div className="bg-[#0e0e10] border border-glass-border p-4 rounded font-mono text-[9px] text-cyan-400/80 leading-relaxed overflow-x-auto">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded font-mono text-[9px] text-cyan-400/80 leading-relaxed overflow-x-auto">
             <span className="text-white font-semibold">EulerIntegrator.cpp snippet:</span>
             <pre className="mt-1">
 {`void EulerIntegrator::integrate(std::vector<Body*>& bodies, float dt) {

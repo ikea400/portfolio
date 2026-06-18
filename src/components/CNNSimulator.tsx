@@ -180,20 +180,20 @@ export default function CNNSimulator() {
   }, [grid]);
 
   return (
-    <div className="bg-[#1b1b1d] border border-glass-border p-6 rounded-lg space-y-6">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-6 rounded-lg space-y-6">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h4 className="text-sm font-metadata-caps text-secondary uppercase tracking-widest flex items-center gap-2">
+          <h4 className="text-sm font-metadata-caps text-[var(--color-secondary)] uppercase tracking-widest flex items-center gap-2">
             <Layers size={14} /> Interactive Convolutional Neural Network Console
           </h4>
-          <p className="text-xs text-on-surface-variant mt-1 font-sans">
+          <p className="text-xs text-[var(--color-secondary)] mt-1 font-sans">
             Draw patterns on the grid to run live Conv2D/MaxPool2D passes, view layer feature maps, and watch classifier weights react.
           </p>
         </div>
 
         <button
           onClick={clearGrid}
-          className="border border-glass-border text-[10px] font-metadata-caps text-on-surface-variant hover:text-primary hover:border-primary px-3 py-1.5 rounded flex items-center gap-1 transition-colors uppercase cursor-pointer"
+          className="border border-[var(--color-border)] text-[10px] font-metadata-caps text-[var(--color-secondary)] hover:text-[var(--color-text)] hover:border-primary px-3 py-1.5 rounded flex items-center gap-1 transition-colors uppercase cursor-pointer"
         >
           <RotateCcw size={10} /> Clear Sketchpad
         </button>
@@ -202,37 +202,37 @@ export default function CNNSimulator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Draw Sketchpad */}
         <div className="lg:col-span-4 flex flex-col items-center">
-          <div className="text-center font-mono text-[9px] text-on-surface-variant opacity-60 mb-2 uppercase select-none">
+          <div className="text-center font-mono text-[9px] text-[var(--color-secondary)] opacity-60 mb-2 uppercase select-none">
             Input Grid Matrix (8x8)
           </div>
-          <div className="grid grid-cols-8 gap-0.5 bg-[#131315] p-2 border border-glass-border rounded-lg shadow-2xl">
+          <div className="grid grid-cols-8 gap-0.5 bg-[var(--color-surface)] p-2 border border-[var(--color-border)] rounded-lg shadow-2xl">
             {grid.map((cell, idx) => (
               <div
                 key={idx}
                 onMouseDown={() => handleCellMouseDown(idx)}
                 onMouseEnter={() => handleCellMouseEnter(idx)}
                 className={`w-7 h-7 md:w-8 md:h-8 border border-black/20 rounded-sm cursor-crosshair transition-all duration-150 ${
-                  cell ? 'bg-[#ffb951] scale-[0.9] shadow' : 'bg-[#1b1b1d] hover:bg-white/5'
+                  cell ? 'bg-[#ffb951] scale-[0.9] shadow' : 'bg-[var(--color-surface)] hover:bg-white/5'
                 }`}
               />
             ))}
           </div>
-          <span className="text-[9px] text-on-surface-variant/60 font-sans mt-3 text-center">
+          <span className="text-[9px] text-[var(--color-secondary)]/60 font-sans mt-3 text-center">
             Click or drag mouse to draw shapes (e.g. + or - lines).
           </span>
         </div>
 
         {/* Feature Maps Visualizer */}
         <div className="lg:col-span-5 flex flex-col space-y-4">
-          <span className="text-[10px] font-metadata-caps uppercase text-secondary tracking-wider text-center flex items-center gap-1.5 justify-center">
+          <span className="text-[10px] font-metadata-caps uppercase text-[var(--color-secondary)] tracking-wider text-center flex items-center gap-1.5 justify-center">
             <Cpu size={12} /> Convolutional Layers (Activations)
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             {/* Horizontal Feature Map */}
-            <div className="bg-[#131315] border border-glass-border p-3 rounded-lg flex flex-col items-center">
+            <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-3 rounded-lg flex flex-col items-center">
               <span className="text-[8px] font-mono text-cyan-400 mb-2">Filter H (Horizontal Edge)</span>
-              <div className="grid grid-cols-6 gap-0.5 bg-black/40 p-1.5 rounded border border-glass-border/30">
+              <div className="grid grid-cols-6 gap-0.5 bg-black/40 p-1.5 rounded border border-[var(--color-border)]/30">
                 {convMapH.map((v, i) => {
                   const brightness = Math.min(255, Math.round(v * 80));
                   return (
@@ -247,7 +247,7 @@ export default function CNNSimulator() {
               </div>
               
               <span className="text-[8px] font-mono text-neutral-500 mt-3 mb-1">Max Pool (2x2)</span>
-              <div className="grid grid-cols-3 gap-0.5 bg-black/40 p-1 rounded border border-glass-border/20">
+              <div className="grid grid-cols-3 gap-0.5 bg-black/40 p-1 rounded border border-[var(--color-border)]/20">
                 {poolMapH.map((v, i) => {
                   const brightness = Math.min(255, Math.round(v * 80));
                   return (
@@ -262,9 +262,9 @@ export default function CNNSimulator() {
             </div>
 
             {/* Vertical Feature Map */}
-            <div className="bg-[#131315] border border-glass-border p-3 rounded-lg flex flex-col items-center">
+            <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-3 rounded-lg flex flex-col items-center">
               <span className="text-[8px] font-mono text-cyan-400 mb-2">Filter V (Vertical Edge)</span>
-              <div className="grid grid-cols-6 gap-0.5 bg-black/40 p-1.5 rounded border border-glass-border/30">
+              <div className="grid grid-cols-6 gap-0.5 bg-black/40 p-1.5 rounded border border-[var(--color-border)]/30">
                 {convMapV.map((v, i) => {
                   const brightness = Math.min(255, Math.round(v * 80));
                   return (
@@ -279,7 +279,7 @@ export default function CNNSimulator() {
               </div>
 
               <span className="text-[8px] font-mono text-neutral-500 mt-3 mb-1">Max Pool (2x2)</span>
-              <div className="grid grid-cols-3 gap-0.5 bg-black/40 p-1 rounded border border-glass-border/20">
+              <div className="grid grid-cols-3 gap-0.5 bg-black/40 p-1 rounded border border-[var(--color-border)]/20">
                 {poolMapV.map((v, i) => {
                   const brightness = Math.min(255, Math.round(v * 80));
                   return (
@@ -296,38 +296,38 @@ export default function CNNSimulator() {
         </div>
 
         {/* Output Probabilities */}
-        <div className="lg:col-span-3 bg-[#131315] border border-glass-border p-4 rounded-lg flex flex-col justify-between space-y-4">
-          <span className="text-[10px] font-metadata-caps uppercase text-secondary tracking-wider block text-center">
+        <div className="lg:col-span-3 bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-lg flex flex-col justify-between space-y-4">
+          <span className="text-[10px] font-metadata-caps uppercase text-[var(--color-secondary)] tracking-wider block text-center">
             Output Classification
           </span>
 
           <div className="space-y-3 font-mono text-xs flex-1 flex flex-col justify-center">
             <div className="space-y-1">
               <div className="flex justify-between text-[10px]">
-                <span className="text-primary font-semibold">Cross / Plus (+)</span>
+                <span className="text-[var(--color-text)] font-semibold">Cross / Plus (+)</span>
                 <span>{predictions.cross}%</span>
               </div>
-              <div className="w-full bg-[#201f21] h-1.5 rounded overflow-hidden">
+              <div className="w-full bg-[var(--color-surface)] h-1.5 rounded overflow-hidden">
                 <div className="bg-[#4ADE80] h-full transition-all duration-300" style={{ width: `${predictions.cross}%` }}></div>
               </div>
             </div>
 
             <div className="space-y-1">
               <div className="flex justify-between text-[10px]">
-                <span className="text-primary font-semibold">Horiz Line (-)</span>
+                <span className="text-[var(--color-text)] font-semibold">Horiz Line (-)</span>
                 <span>{predictions.horizontal}%</span>
               </div>
-              <div className="w-full bg-[#201f21] h-1.5 rounded overflow-hidden">
+              <div className="w-full bg-[var(--color-surface)] h-1.5 rounded overflow-hidden">
                 <div className="bg-[#ffb951] h-full transition-all duration-300" style={{ width: `${predictions.horizontal}%` }}></div>
               </div>
             </div>
 
             <div className="space-y-1">
               <div className="flex justify-between text-[10px]">
-                <span className="text-primary font-semibold">Vert Line (|)</span>
+                <span className="text-[var(--color-text)] font-semibold">Vert Line (|)</span>
                 <span>{predictions.vertical}%</span>
               </div>
-              <div className="w-full bg-[#201f21] h-1.5 rounded overflow-hidden">
+              <div className="w-full bg-[var(--color-surface)] h-1.5 rounded overflow-hidden">
                 <div className="bg-[#3b82f6] h-full transition-all duration-300" style={{ width: `${predictions.vertical}%` }}></div>
               </div>
             </div>
@@ -337,7 +337,7 @@ export default function CNNSimulator() {
                 <span className="text-neutral-500 font-semibold">No Shape / Background</span>
                 <span>{predictions.empty}%</span>
               </div>
-              <div className="w-full bg-[#201f21] h-1.5 rounded overflow-hidden">
+              <div className="w-full bg-[var(--color-surface)] h-1.5 rounded overflow-hidden">
                 <div className="bg-neutral-600 h-full transition-all duration-300" style={{ width: `${predictions.empty}%` }}></div>
               </div>
             </div>

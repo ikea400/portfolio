@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // HMR trigger
 import { Project } from "./types";
 import ProjectCard from "./components/ProjectCard";
 import ProjectModal from "./components/ProjectModal";

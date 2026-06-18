@@ -84,12 +84,12 @@ export default function ZeroKnowledgeSimulator() {
   ];
 
   return (
-    <div className="bg-[#1b1b1d] border border-glass-border p-6 rounded-lg space-y-6">
+    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-6 rounded-lg space-y-6">
       <div>
-        <h4 className="text-sm font-metadata-caps text-secondary uppercase tracking-widest flex items-center gap-2">
+        <h4 className="text-sm font-metadata-caps text-[var(--color-secondary)] uppercase tracking-widest flex items-center gap-2">
           <Shield size={14} /> Zero-Knowledge OPAQUE Protocol &amp; TPM Simulator
         </h4>
-        <p className="text-xs text-on-surface-variant mt-1 font-sans">
+        <p className="text-xs text-[var(--color-secondary)] mt-1 font-sans">
           Simulate an asymmetric password authenticated key exchange. Step through client-side blinding, server envelop dispatch, and local TPM decryption bounds.
         </p>
       </div>
@@ -97,17 +97,17 @@ export default function ZeroKnowledgeSimulator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Side: Step-by-Step Cryptographic Flow */}
         <div className="lg:col-span-6 space-y-4">
-          <div className="bg-[#131315] border border-glass-border p-4 rounded-lg space-y-4">
-            <span className="text-[10px] font-metadata-caps uppercase text-secondary tracking-wider block">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-lg space-y-4">
+            <span className="text-[10px] font-metadata-caps uppercase text-[var(--color-secondary)] tracking-wider block">
               Cryptographic Execution Steps
             </span>
 
             {step === 0 && (
               <div className="space-y-4">
                 <div className="space-y-1.5">
-                  <div className="flex justify-between text-[9px] font-mono text-on-surface-variant">
+                  <div className="flex justify-between text-[9px] font-mono text-[var(--color-secondary)]">
                     <span>VAULT PASSPHRASE</span>
-                    <button onClick={() => setShowPassword(!showPassword)} className="hover:text-primary transition-colors cursor-pointer flex items-center gap-1">
+                    <button onClick={() => setShowPassword(!showPassword)} className="hover:text-[var(--color-text)] transition-colors cursor-pointer flex items-center gap-1">
                       {showPassword ? <EyeOff size={10} /> : <Eye size={10} />} {showPassword ? 'HIDE' : 'SHOW'}
                     </button>
                   </div>
@@ -115,14 +115,14 @@ export default function ZeroKnowledgeSimulator() {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-[#201f21] border border-glass-border text-xs font-mono p-2.5 text-primary focus:outline-none focus:border-secondary rounded"
+                    className="w-full bg-[var(--color-surface)] border border-[var(--color-border)] text-xs font-mono p-2.5 text-[var(--color-text)] focus:outline-none focus:border-secondary rounded"
                   />
                 </div>
 
                 <button
                   onClick={runArgonHash}
                   disabled={isHashing || !password}
-                  className="w-full bg-secondary text-on-secondary py-2 text-xs font-metadata-caps uppercase hover:bg-[#ffe2b3] transition-colors rounded tracking-widest flex justify-center items-center gap-1.5 cursor-pointer disabled:opacity-40"
+                  className="w-full bg-[var(--color-secondary)] text-[var(--color-background)] py-2 text-xs font-metadata-caps uppercase hover:bg-[#ffe2b3] transition-colors rounded tracking-widest flex justify-center items-center gap-1.5 cursor-pointer disabled:opacity-40"
                 >
                   <Key size={12} /> {isHashing ? 'COMPUTING ARGON2ID...' : '1. CLIENT HASH (ARGON2)'}
                 </button>
@@ -131,14 +131,14 @@ export default function ZeroKnowledgeSimulator() {
 
             {step === 1 && (
               <div className="space-y-3 font-mono text-xs">
-                <div className="bg-[#1b1b1d] p-2.5 rounded border border-glass-border/30 overflow-x-auto text-[10px]">
+                <div className="bg-[var(--color-surface)] p-2.5 rounded border border-[var(--color-border)]/30 overflow-x-auto text-[10px]">
                   <span className="text-neutral-500 block text-[8px]">ARGON2ID KEY DERIVATION OUTPUT</span>
                   <span className="text-[#4ADE80] break-all">{argonHash}</span>
                 </div>
 
                 <button
                   onClick={runOpaqueBlind}
-                  className="w-full bg-secondary text-on-secondary py-2 text-xs font-metadata-caps uppercase hover:bg-[#ffe2b3] transition-colors rounded tracking-widest flex justify-center items-center gap-1.5 cursor-pointer"
+                  className="w-full bg-[var(--color-secondary)] text-[var(--color-background)] py-2 text-xs font-metadata-caps uppercase hover:bg-[#ffe2b3] transition-colors rounded tracking-widest flex justify-center items-center gap-1.5 cursor-pointer"
                 >
                   <Shield size={12} /> 2. BLIND PASSWORD (OPAQUE)
                 </button>
@@ -147,7 +147,7 @@ export default function ZeroKnowledgeSimulator() {
 
             {step === 2 && (
               <div className="space-y-3 font-mono text-xs">
-                <div className="bg-[#1b1b1d] p-2.5 rounded border border-glass-border/30 overflow-x-auto text-[10px]">
+                <div className="bg-[var(--color-surface)] p-2.5 rounded border border-[var(--color-border)]/30 overflow-x-auto text-[10px]">
                   <span className="text-neutral-500 block text-[8px]">BLINDED KEY DISPATCHED TO DRAGON BACKEND</span>
                   <span className="text-cyan-400 break-all">{blindedHex}</span>
                 </div>
@@ -166,13 +166,13 @@ export default function ZeroKnowledgeSimulator() {
                 <div className="inline-flex p-2 bg-[#2ADE80]/10 border border-[#2ADE80]/30 rounded-full text-[#2ADE80] mb-1">
                   <CheckCircle size={24} className="animate-bounce" />
                 </div>
-                <p className="text-xs text-primary font-mono leading-relaxed">
+                <p className="text-xs text-[var(--color-text)] font-mono leading-relaxed">
                   OPAQUE Authentication verification success! Master key rebuilt client-side.
                 </p>
 
                 <button
                   onClick={triggerTpmUnlock}
-                  className="w-full bg-secondary text-on-secondary py-2 text-xs font-metadata-caps uppercase hover:bg-[#ffe2b3] transition-colors rounded tracking-widest flex justify-center items-center gap-1.5 cursor-pointer"
+                  className="w-full bg-[var(--color-secondary)] text-[var(--color-background)] py-2 text-xs font-metadata-caps uppercase hover:bg-[#ffe2b3] transition-colors rounded tracking-widest flex justify-center items-center gap-1.5 cursor-pointer"
                 >
                   <Cpu size={12} /> 4. INITIATE TPM MODULE NCRYPT BIND
                 </button>
@@ -184,12 +184,12 @@ export default function ZeroKnowledgeSimulator() {
                 <div className="inline-flex p-3 bg-[#4ADE80]/10 border border-[#4ADE80]/30 rounded-full text-[#4ADE80]">
                   <CheckCircle size={28} />
                 </div>
-                <p className="text-xs font-mono text-primary font-semibold">
+                <p className="text-xs font-mono text-[var(--color-text)] font-semibold">
                   TPM Binding active. Password vault sectors fully decrypted.
                 </p>
                 <button
                   onClick={resetSimulator}
-                  className="border border-glass-border text-[9px] font-metadata-caps text-on-surface-variant hover:text-primary px-3 py-1 rounded transition-colors uppercase cursor-pointer mx-auto block"
+                  className="border border-[var(--color-border)] text-[9px] font-metadata-caps text-[var(--color-secondary)] hover:text-[var(--color-text)] px-3 py-1 rounded transition-colors uppercase cursor-pointer mx-auto block"
                 >
                   Lock Vault &amp; Restart
                 </button>
@@ -200,11 +200,11 @@ export default function ZeroKnowledgeSimulator() {
 
         {/* Right Side: Decrypted Vault Preview & Cryptographic Logging */}
         <div className="lg:col-span-6 space-y-4">
-          <div className="bg-[#131315] border border-glass-border p-4 rounded-lg flex flex-col h-40">
-            <span className="text-[10px] font-metadata-caps text-on-surface-variant tracking-wider uppercase mb-2 block">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-lg flex flex-col h-40">
+            <span className="text-[10px] font-metadata-caps text-[var(--color-secondary)] tracking-wider uppercase mb-2 block">
               Cryptographic protocol console log
             </span>
-            <div className="bg-[#0e0e10] p-2.5 text-[9px] font-mono text-cyan-400/80 flex-1 overflow-y-auto space-y-1 rounded">
+            <div className="bg-[var(--color-surface)] p-2.5 text-[9px] font-mono text-cyan-400/80 flex-1 overflow-y-auto space-y-1 rounded">
               {consoleLogs.map((log, i) => (
                 <div key={i} className="leading-snug">
                   {log}
@@ -213,32 +213,32 @@ export default function ZeroKnowledgeSimulator() {
             </div>
           </div>
 
-          <div className="bg-[#131315] border border-glass-border p-4 rounded-lg space-y-3">
-            <span className="text-[10px] font-metadata-caps text-secondary uppercase tracking-wider block">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-lg space-y-3">
+            <span className="text-[10px] font-metadata-caps text-[var(--color-secondary)] uppercase tracking-wider block">
               Secure Password Database Vault Browser
             </span>
 
             {step < 4 ? (
-              <div className="h-28 flex flex-col items-center justify-center border border-dashed border-glass-border rounded p-4 text-center">
-                <Shield className="text-on-surface-variant/40 mb-1.5" size={20} />
-                <span className="text-[10px] text-on-surface-variant font-mono uppercase tracking-wider block">Vault Locked</span>
+              <div className="h-28 flex flex-col items-center justify-center border border-dashed border-[var(--color-border)] rounded p-4 text-center">
+                <Shield className="text-[var(--color-secondary)]/40 mb-1.5" size={20} />
+                <span className="text-[10px] text-[var(--color-secondary)] font-mono uppercase tracking-wider block">Vault Locked</span>
                 <span className="text-[8px] text-neutral-500 font-sans mt-0.5 block">Complete steps 1–4 to decrypt database sectors.</span>
               </div>
             ) : (
               <div className="space-y-2 h-28 overflow-y-auto pr-1">
                 {vaultItems.map((item, idx) => (
-                  <div key={idx} className="bg-[#1b1b1d] border border-glass-border p-2 rounded flex justify-between items-center text-[10px] font-mono">
+                  <div key={idx} className="bg-[var(--color-surface)] border border-[var(--color-border)] p-2 rounded flex justify-between items-center text-[10px] font-mono">
                     <div>
                       <span className="text-[#ffb951] font-bold block">{item.site}</span>
                       <span className="text-neutral-500 text-[8px] block">User: {item.user}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-primary bg-black/40 px-2 py-0.5 rounded tracking-widest font-semibold">
+                      <span className="text-[var(--color-text)] bg-black/40 px-2 py-0.5 rounded tracking-widest font-semibold">
                         {revealVaultIdx === idx ? item.pass : '••••••••••••'}
                       </span>
                       <button
                         onClick={() => setRevealVaultIdx(revealVaultIdx === idx ? null : idx)}
-                        className="text-on-surface-variant hover:text-white transition-colors cursor-pointer"
+                        className="text-[var(--color-secondary)] hover:text-white transition-colors cursor-pointer"
                         title={revealVaultIdx === idx ? 'Hide password' : 'Show password'}
                       >
                         {revealVaultIdx === idx ? <EyeOff size={12} /> : <Eye size={12} />}
