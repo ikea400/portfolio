@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export default function BackgroundGrid() {
+export default function BackgroundGrid({ isDarkMode = false }: { isDarkMode?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -79,7 +79,9 @@ export default function BackgroundGrid() {
         : -150 - Math.random() * 100;
 
       const isOrange = Math.random() < 0.35;
-      const color = isOrange ? '255, 185, 81' : '230, 242, 255';
+      const color = isDarkMode 
+        ? (isOrange ? '255, 185, 81' : '230, 242, 255')
+        : (isOrange ? '37, 99, 235' : '15, 23, 42');
 
       return {
         x: startX,
@@ -125,7 +127,7 @@ export default function BackgroundGrid() {
 
     const draw = () => {
       time += 0.01;
-      ctx.fillStyle = '#131315';
+      ctx.fillStyle = isDarkMode ? '#09090B' : '#FAFAFA';
       ctx.fillRect(0, 0, width, height);
 
       // Update and Draw Meteors (before grid dots to layer correctly)
@@ -267,7 +269,9 @@ export default function BackgroundGrid() {
             size += meteorInfluence * 1.0;
           }
 
-          ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+          ctx.fillStyle = isDarkMode 
+            ? `rgba(255, 255, 255, ${alpha})`
+            : `rgba(0, 0, 0, ${alpha})`;
           ctx.beginPath();
           ctx.arc(dotX, dotY, size, 0, Math.PI * 2);
           ctx.fill();
@@ -286,13 +290,13 @@ export default function BackgroundGrid() {
       resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [isDarkMode]);
 
   return (
     <canvas
       ref={canvasRef}
       id="shader-canvas-ANIMATION_5"
-      className="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-40 bg-[#131315]"
+      className="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-60 bg-[var(--color-background)]"
     />
   );
 }

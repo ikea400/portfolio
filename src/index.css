@@ -1,9 +1,95 @@
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+:root {
+  --color-primary: #18181B;
+  --color-secondary: #3F3F46;
+  --color-cta: #2563EB;
+  --color-background: #FAFAFA;
+  --color-text: #09090B;
+  --color-surface: #FFFFFF;
+  --color-border: rgba(0, 0, 0, 0.06);
+  --color-surface-hover: rgba(0, 0, 0, 0.04);
+  --color-footer-bg: #18181B;
+}
+
+.dark {
+  --color-primary: #FAFAFA;
+  --color-secondary: #A1A1AA;
+  --color-cta: #3B82F6;
+  --color-background: #09090B;
+  --color-text: #FAFAFA;
+  --color-surface: #18181B;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-surface-hover: rgba(255, 255, 255, 0.05);
+  --color-footer-bg: #09090B;
+}
+
 @theme {
-  --font-sans: "Hanken Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-cta: var(--color-cta);
+  --color-background: var(--color-background);
+  --color-text: var(--color-text);
+  --color-surface: var(--color-surface);
+  --color-border: var(--color-border);
+  --color-surface-hover: var(--color-surface-hover);
+  
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    background: var(--color-cta);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 200ms ease;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 200ms ease;
+    cursor: pointer;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    transition: all 200ms ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
 }
 
 @layer utilities {
